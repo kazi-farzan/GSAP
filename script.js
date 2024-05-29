@@ -1,31 +1,92 @@
 var tl = gsap.timeline();
 
-tl.from("#box1", {
-  y: 25,
-  opacity: 0,
-  duration: 1,
+gsap.from("#page1 #box", {
+  rotate: 360,
+  duration: 2,
   delay: 1,
-  stagger: 1, //Stagger will display every element with box property one after the another after "1" second. -1 will start the process from the last element with the tag.
-
-  repeat: 1, //this animation will run twice, one base one repeat.
-  yoyo: true, //yoyo needs repeat by atleast 1 to work.
 });
 
-tl.from("#box2", {
-  x: 25,
-  opacity: 0,
-  duration: 1,
-  repeat: 2,
-  yoyo: true,
+gsap.from("#page2 #box", {
+  rotate: 360,
+  duration: 2,
+  // scrollTrigger: "#page2 #box", //basic way to toggle scrollTrigger
+  scrollTrigger: {
+    trigger: "#page2 #box",
+    scroller: "body",
+    start: "top 70%",
+    end: "top 40%",
+    markers: true, //shows where the the trigger is for the animation of this element
+  },
 });
 
-gsap.to("#box3", {
-  y: 25,
-  opacity: 0,
-  duration: 1,
-  delay: 3,
-  stagger: 1,
+gsap.from("#page3 #box", {
+  rotate: 360,
+  duration: 2,
+  // scrollTrigger: "#page2 #box", //basic way to toggle scrollTrigger
+  scrollTrigger: {
+    trigger: "#page3 #box",
+    scroller: "body",
+    markers: true, //shows where the the trigger is for the animation of this element
+    start: "top 70%",
+    end: "top 40%",
+    scrub: 1, //makes the animation happen the more we scroll
+  },
+});
 
-  repeat: 1,
-  yoyo: true,
+gsap.from("#page4 #grid",{
+  rotate: 720,  
+  duration:2, 
+  scrollTrigger:{
+    trigger:"#page4 #grid",
+    scroller: "body",
+    markers:true,
+    start: "top 70%",
+    end: "top 40%",
+    scrub: 2,
+  }
+});
+
+gsap.to("#page4 #grid",{
+  scale:2,
+  yoyo:true,
+  repeat:1,
+  duration:2, 
+  scrollTrigger:{
+    trigger:"#page4 #grid",
+    scroller: "body",
+    markers:true,
+    start: "top 70%",
+    end: "top 40%",
+    scrub: 2,
+  }
+});
+
+gsap.from("#page4 #grid #box-small",{
+  rotate: -720,
+  duration:2, 
+  scrollTrigger:{
+    trigger:"#page4 #grid #box-small",
+    scroller: "body",
+    markers:true,
+    start: "top 70%",
+    end: "top 40%",
+    scrub: 2.1,
+  }
+});
+
+
+gsap.from("#page5 #box",{
+  rotate: 180,
+  duration:2,
+  scrollTrigger:{
+    trigger:"#page5 #box",
+    scroller:"body",
+    start: "top 10%",
+    end: "top 80%",
+    scrub: 2,
+
+    pin: true,
+    markers: true,
+    
+  }
 });

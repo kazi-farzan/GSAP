@@ -1,92 +1,27 @@
-var tl = gsap.timeline();
+var path= `M 10 100 Q 500 100 990 100`
 
-gsap.from("#page1 #box", {
-  rotate: 360,
-  duration: 2,
-  delay: 1,
-});
+var finalPath=`M 10 100 Q 500 100 990 100`
 
-gsap.from("#page2 #box", {
-  rotate: 360,
-  duration: 2,
-  // scrollTrigger: "#page2 #box", //basic way to toggle scrollTrigger
-  scrollTrigger: {
-    trigger: "#page2 #box",
-    scroller: "body",
-    start: "top 70%",
-    end: "top 40%",
-    markers: true, //shows where the the trigger is for the animation of this element
-  },
-});
+var string=document.querySelector("#string")
 
-gsap.from("#page3 #box", {
-  rotate: 360,
-  duration: 2,
-  // scrollTrigger: "#page2 #box", //basic way to toggle scrollTrigger
-  scrollTrigger: {
-    trigger: "#page3 #box",
-    scroller: "body",
-    markers: true, //shows where the the trigger is for the animation of this element
-    start: "top 70%",
-    end: "top 40%",
-    scrub: 1, //makes the animation happen the more we scroll
-  },
-});
+// string.addEventListener("mouseenter", function(dets){
+//   console.log("entered");
+//   console.log(dets)
+// })
 
-gsap.from("#page4 #grid",{
-  rotate: 720,  
-  duration:2, 
-  scrollTrigger:{
-    trigger:"#page4 #grid",
-    scroller: "body",
-    markers:true,
-    start: "top 70%",
-    end: "top 40%",
-    scrub: 2,
-  }
-});
+string.addEventListener("mousemove",function(dets){
+  path= `M 10 100 Q ${dets.x} ${dets.y} 990 100`
+  gsap.to("svg path",{
+    attr:{d:path},
+    duration:.3,
+    ease: "power3.out"
+  })
+})
 
-gsap.to("#page4 #grid",{
-  scale:2,
-  yoyo:true,
-  repeat:1,
-  duration:2, 
-  scrollTrigger:{
-    trigger:"#page4 #grid",
-    scroller: "body",
-    markers:true,
-    start: "top 70%",
-    end: "top 40%",
-    scrub: 2,
-  }
-});
-
-gsap.from("#page4 #grid #box-small",{
-  rotate: -720,
-  duration:2, 
-  scrollTrigger:{
-    trigger:"#page4 #grid #box-small",
-    scroller: "body",
-    markers:true,
-    start: "top 70%",
-    end: "top 40%",
-    scrub: 2.1,
-  }
-});
-
-
-gsap.from("#page5 #box",{
-  rotate: 180,
-  duration:2,
-  scrollTrigger:{
-    trigger:"#page5 #box",
-    scroller:"body",
-    start: "top 10%",
-    end: "top 80%",
-    scrub: 2,
-
-    pin: true,
-    markers: true,
-    
-  }
-});
+string.addEventListener("mouseleave", function(){
+  gsap.to("svg path", {
+    attr: {d:finalPath},
+    duration:1.5,
+    ease: "elastic.out(1.2,0.2)",
+  })
+})
